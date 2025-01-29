@@ -5,7 +5,8 @@
         "device": "*",
         "multiplayer": "*",
         "Timers": "github:microsoft/arcade-timers#v1.1.0",
-        "animation": "*"
+        "animation": "*",
+        "arcade-background-scroll": "github:microsoft/arcade-background-scroll#v0.1.2"
     },
     "files": [
         "main.blocks",

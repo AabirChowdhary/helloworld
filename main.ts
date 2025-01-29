@@ -98,7 +98,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.beehive, function (sprite, other
     bee.follow(roblox)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    info.changeLifeBy(-1)
     sprites.destroy(bee)
 })
 let bee: Sprite = null
@@ -107,19 +106,19 @@ let coin: Sprite = null
 let roblox: Sprite = null
 scene.setBackgroundColor(9)
 roblox = sprites.create(img`
-    . . . . . . 6 6 6 . . . . . . . 
-    . . . . 6 6 f 6 f 6 6 . . . . . 
-    . . . 6 6 6 6 f 6 6 6 6 . . . . 
-    6 6 6 6 6 f f 6 f f 6 6 6 6 6 . 
-    6 6 6 6 6 6 f f f 6 6 6 6 6 6 6 
-    6 . 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-    6 . 6 6 6 6 6 6 6 6 6 6 6 . 6 6 
-    . . 6 6 6 6 6 6 6 6 6 6 6 . . . 
-    . . d d . . . . . . . d d . . . 
-    . . d d . . . . . . . d d . . . 
-    . . d d . . . . . . . d d . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
+    . . . f f f f f f f f . . . . . 
+    . . . f f 6 6 6 6 f f . . . . . 
+    . . f f 6 6 6 6 6 6 f . . . . . 
+    . . f f 6 f 6 6 f 6 f b b . . . 
+    . . f 6 6 6 6 6 6 6 6 f b b . . 
+    . . . 6 6 6 6 6 6 f 6 6 6 b b . 
+    . . . 6 6 f f f f 6 6 . 6 6 b . 
+    . . . 6 6 6 6 6 6 6 6 . . 6 6 . 
+    . . . 6 6 6 6 6 6 6 6 . . . . . 
+    . . . d d d . . d d d . . . . . 
+    . . . d d d . . d d d . . . . . 
+    . . . d d d . . d d d . . . . . 
+    . . . d d d . . d d d . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -283,3 +282,26 @@ for (let value of tiles.getTilesByType(assets.tile`myTile6`)) {
         info.setLife(3)
     }
 }
+game.onUpdate(function () {
+    roblox.setImage(img`
+        . . . f f f f f f f f . . . . . 
+        . . . f f 6 6 6 6 f f . . . . . 
+        . . f f 6 6 6 6 6 6 f . . . . . 
+        . . f f 6 f 6 6 f 6 f b b . . . 
+        . . f 6 6 6 6 6 6 6 6 f b b . . 
+        . . . 6 6 6 6 6 6 f 6 6 6 b b . 
+        . . . 6 6 f f f f 6 6 . 6 6 b . 
+        . . . 6 6 6 6 6 6 6 6 . . 6 6 . 
+        . . . 6 6 6 6 6 6 6 6 . . . . . 
+        . . . d d d . . d d d . . . . . 
+        . . . d d d . . d d d . . . . . 
+        . . . d d d . . d d d . . . . . 
+        . . . d d d . . d d d . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `)
+    if (roblox.vx < 0) {
+        roblox.image.flipX()
+    }
+})
