@@ -304,4 +304,26 @@ game.onUpdate(function () {
     if (roblox.vx < 0) {
         roblox.image.flipX()
     }
+    if (roblox.vy < 0) {
+        roblox.setImage(img`
+            . . . f f f f f f f f . . . . . 
+            . . f f 6 6 6 6 6 6 f f . . . . 
+            . . f 6 f f 6 f f 6 6 f . . . . 
+            . f f 6 6 6 6 6 6 6 6 . . . . . 
+            . f f 6 6 6 6 6 6 6 6 . . . . . 
+            . f f 6 f f f f f 6 6 . . . . . 
+            . f f 6 6 6 6 6 6 6 6 . . . . . 
+            . f f 6 6 6 6 6 6 6 6 . . . . . 
+            . . . d d d 6 6 6 6 6 . . . . . 
+            . . . d d d 6 6 6 6 6 . . . . . 
+            . . . d d d 6 6 6 6 6 . . . . . 
+            . . . d d d 6 6 6 6 6 . . . . . 
+            . . . . . . . . d d d . . . . . 
+            . . . . . . . . d d d . . . . . 
+            . . . . . . . . d d d . . . . . 
+            . . . . . . . . d d d . . . . . 
+            `)
+    } else {
+    	
+    }
 })
