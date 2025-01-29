@@ -99,6 +99,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.beehive, function (sprite, other
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(bee)
+    info.changeLifeBy(-1)
 })
 let bee: Sprite = null
 let beehive: Sprite = null
