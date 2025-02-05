@@ -1,8 +1,13 @@
 namespace SpriteKind {
     export const coin = SpriteKind.create()
     export const beehive = SpriteKind.create()
+    export const fireball = SpriteKind.create()
+    export const diamond = SpriteKind.create()
 }
 let list: number[] = []
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    game.reset()
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (roblox.vy == 0) {
         roblox.vy = -150
@@ -208,13 +213,44 @@ function startlevel () {
         }
     }
     current_level = 0
+    for (let value of tiles.getTilesByType(assets.tile`myTile9`)) {
+        fireball = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . 5 . . . . . . . . 5 . . 5 . 
+            . . . . 2 . 4 4 . . . . . . . . 
+            . 5 . . . . . . . 4 . 4 . . . . 
+            . . . 4 . . 4 4 4 . . . . 2 . 5 
+            . . . . . 4 4 2 4 4 . 5 . . . . 
+            . 2 . . 4 4 2 2 2 4 4 . . 4 . . 
+            4 . . 4 4 2 5 5 5 2 4 4 . . 2 . 
+            4 4 . 4 4 2 5 2 5 2 4 4 . . . . 
+            . . . 4 4 2 5 5 5 2 4 4 . 4 . . 
+            5 . . 4 4 2 2 2 2 2 4 4 . . . . 
+            2 2 . . 4 4 4 2 4 4 4 . . . . . 
+            . . . . . 4 4 4 4 4 . 5 . 4 . . 
+            . . 4 . . . . . . . . . . . . . 
+            5 . . . 4 . . 4 . . 4 . . 5 . . 
+            . . 5 . . . . . . 5 . . 5 5 . 5 
+            `, SpriteKind.fireball)
+        tiles.placeOnTile(fireball, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
+        animation.runMovementAnimation(
+        fireball,
+        animation.animationPresets(animation.bobbing),
+        5000,
+        true
+        )
+        fireball.startEffect(effects.fire)
+    }
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
     current_level += 1
     startlevel()
 })
 info.onLifeZero(function () {
+    game.gameOver(false)
     game.setGameOverEffect(false, effects.dissolve)
+    game.reset()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.beehive, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
@@ -296,11 +332,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.beehive, function (sprite, other
     bee.setPosition(roblox.x + 80, roblox.y + 80)
     bee.follow(roblox)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.fireball, function (sprite, otherSprite) {
+    info.changeLifeBy(-2)
+    sprites.destroy(otherSprite)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(bee)
     info.changeLifeBy(-1)
 })
 let bee: Sprite = null
+let fireball: Sprite = null
 let beehive: Sprite = null
 let coin: Sprite = null
 let roblox: Sprite = null
